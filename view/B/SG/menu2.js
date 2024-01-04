@@ -103,6 +103,23 @@ document.write('\
                             <li><a id="retailProductLink"><i class="icon icon-coffee"></i> Retail Products</a></li>\
                         </ul>\
                     </li>\
+                <li class="dropdown">\
+                <a class="dropdown-toggle" href="#">\
+                    Last Chance<i class="icon icon-angle-down"></i>\
+                </a>\
+                <ul class="dropdown-menu">\
+                <li><a href="/B/' + countryPrefix + '/lastChance.html"><i class="icon icon-map-marker"></i> All Categories</a></li>\
+                <li><a id="tableDeskLink"><i class="icon icon-map-marker"></i> Tables & Desk</a></li>\
+                <li><a href="/B/' + countryPrefix + '/furnitureCategory.html?cat=Bathroom"><i class="icon icon-map-marker"></i> Bathroom</a></li>\
+                <li><a id="bedMattressLink"><i class="icon icon-map-marker"></i> Beds & Mattresses</a></li>\
+                <li><a id="sofaChairLink"><i class="icon icon-map-marker"></i> Sofas & Chair</a></li>\
+                <li><a id="cabinetStorageLink"><i class="icon icon-map-marker"></i> Cabinets & Storage</a></li>\
+                <li><a href="/B/' + countryPrefix + '/furnitureCategory.html?cat=Lightings"><i class="icon icon-map-marker"></i> Lightings</a></li>\
+                <li><a href="/B/' + countryPrefix + '/furnitureCategory.html?cat=Study"><i class="icon icon-map-marker"></i> Study</a></li>\
+                <li><a href="/B/' + countryPrefix + '/furnitureCategory.html?cat=Children"><i class="icon icon-map-marker"></i> Children</a></li>\
+                <li><a id="retailProductLink"><i class="icon icon-coffee"></i> Retail Products</a></li>\
+                </ul>\
+            </li>\
                 </ul>\
             </nav>\
         </div>\
