@@ -49,6 +49,17 @@ app.get('/api/getAllFurniture', middleware.checkToken, function (req, res) {
         });
 });
 
+app.get('/api/getAllFurnitureQuantityLimit', function (req, res) {
+    furniture.getAllFurnitureWithQuantityLimit()
+        .then((result) => {
+            res.send(result);
+        })
+        .catch((err) => {
+            console.log(err);
+            res.status(500).send("Failed to get all furniture");
+        });
+});
+
 var bodyParser = require('body-parser');
 var jsonParser = bodyParser.json({ extended: false });
 app.post('/api/addFurniture', upload.single('imgfile'), function (req, res) {
