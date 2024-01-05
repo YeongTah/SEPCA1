@@ -42,6 +42,62 @@ var furnitureDB = {
             });
         });
     },
+    getAllFurnitureWithQuantityLimit: function () {
+        return new Promise((resolve, reject) => {
+            var conn = db.getConnection();
+            conn.connect(function (err) {
+                if (err) {
+                    console.log(err);
+                    conn.end();
+                    return reject(err);
+                } else {
+                    var sql = `
+                        SELECT i.ID as id, i.NAME as name, f.IMAGEURL as imageURL, i.SKU as sku,
+                               i.DESCRIPTION as description, i.TYPE as type, i._LENGTH as length,
+                               i.WIDTH as width, i.HEIGHT as height, i.CATEGORY as category,
+                               COALESCE(SUM(l.QUANTITY), 0) AS quantity
+                        FROM itementity i
+                        JOIN furnitureentity f ON i.ID = f.ID
+                        LEFT JOIN lineitementity l ON i.ID = l.ITEM_ID
+                        LEFT JOIN storagebinentity_lineitementity sbli ON l.ID = sbli.lineItems_ID
+                        LEFT JOIN storagebinentity sb ON sbli.StorageBinEntity_ID = sb.ID
+                        LEFT JOIN warehouseentity w ON sb.WAREHOUSE_ID = w.ID
+                        LEFT JOIN storeentity s ON w.ID = s.WAREHOUSE_ID
+                        WHERE i.ISDELETED = FALSE
+                          AND (sb.TYPE = "Outbound" OR sb.TYPE IS NULL)
+                        GROUP BY i.ID, i.NAME, f.IMAGEURL, i.SKU, i.DESCRIPTION, i.TYPE, i._LENGTH, i.WIDTH, i.HEIGHT, i.CATEGORY
+                        HAVING COALESCE(SUM(l.QUANTITY), 0) <= 5;
+                    `;
+    
+                    conn.query(sql, function (err, result) {
+                        if (err) {
+                            conn.end();
+                            return reject(err);
+                        } else {
+                            var furList = [];
+                            for (var i = 0; i < result.length; i++) {
+                                var fur = new Furniture();
+                                fur.id = result[i].id;
+                                fur.name = result[i].name;
+                                fur.imageURL = result[i].imageURL;
+                                fur.sku = result[i].sku;
+                                fur.description = result[i].description;
+                                fur.type = result[i].type;
+                                fur.length = result[i].length;
+                                fur.width = result[i].width;
+                                fur.height = result[i].height;
+                                fur.category = result[i].category;
+                                fur.quantity = result[i].quantity;
+                                furList.push(fur);
+                            }
+                            conn.end();
+                            return resolve(furList);
+                        }
+                    });
+                }
+            });
+        });
+    },
     getFurnitureByCat: function (countryId, cat) {
         return new Promise( ( resolve, reject ) => {
             var conn = db.getConnection();

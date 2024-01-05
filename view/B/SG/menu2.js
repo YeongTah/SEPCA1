@@ -1,3 +1,14 @@
+function addRedDotToPromotionLink(hasData) {
+    var promotionLink = document.getElementById("promotionAndSalesLink");
+
+    if (hasData) {
+        var redDot = document.createElement("span");
+        redDot.className = "red-dot";
+        promotionLink.appendChild(redDot);
+        promotionLink.classList.add("has-red-dot"); // Add a class to indicate the red dot is present
+    }
+}
+
 var countryPrefix = localStorage.getItem("urlPrefix");
 document.write('\
 <script>\
@@ -21,6 +32,8 @@ document.write('\
         document.getElementById("sofaChairLink").setAttribute("href", "/B/' + countryPrefix + '/furnitureCategory.html?cat=" + encodeURIComponent("Sofas & Chair"));\
         document.getElementById("cabinetStorageLink").setAttribute("href", "/B/' + countryPrefix + '/furnitureCategory.html?cat=" + encodeURIComponent("Cabinets & Storage"));\
         document.getElementById("retailProductLink").setAttribute("href", "/B/' + countryPrefix + '/retailProductsCategory.html?cat=" + encodeURIComponent("All Retail Products"));\
+        var shouldShowRedDot = true;\
+         addRedDotToPromotionLink(shouldShowRedDot);\
     }, false);\
     function logout() {\
         sessionStorage.clear();\
@@ -103,6 +116,12 @@ document.write('\
                             <li><a id="retailProductLink"><i class="icon icon-coffee"></i> Retail Products</a></li>\
                         </ul>\
                     </li>\
+                    <li id = "promotionAndSalesLink">\
+                        <a href="/B/' + countryPrefix + '/promotionAndSales.html">Offer & Promotion</a>\
+                    </li>\
+                    <li id = "promotionAndSalesLink">\
+                    <a href="/B/' + countryPrefix + '/lastChance.html">Last Chance</a>\
+                </li>\
                 </ul>\
             </nav>\
         </div>\

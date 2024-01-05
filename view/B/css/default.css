@@ -350,3 +350,13 @@ article.post .post-date .day {
 body.boxed .body {
     border-top-color: #cc3b33;
 }
+/* red dot at promotion page */
+.red-dot {
+    width: 10px;
+    height: 10px;
+    background-color: red;
+    border-radius: 50%;
+    position: absolute;
+    top: 10px; /* Adjust the top position as needed */
+    right: 10px; /* Adjust the right position as needed */
+}
